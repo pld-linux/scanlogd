@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# scanlogd	logs port scaning
+#
+# chkconfig:	345 20 80
+#
+# description:	Tries to detect and log scanning of ports.
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Check that networking is up.
+if is_no "${NETWORKING}"; then
+	msg_Network_Down scanlogd
+	exit 1
+fi
+
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/scanlogd ]; then
+		msg_starting scanlogd
+		daemon scanlogd
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/scanlogd
+	else
+		msg_Already_Running scanlogd
+		exit 1
+	fi
+        ;;
+  stop)
+        # Stop daemons.
+	if [ -f /var/lock/subsys/scanlogd ]; then
+		msg_stopping scanlogd
+		killproc scanlogd
+		rm -f /var/lock/subsys/scanlogd >/dev/null 2>&1
+	else
+		msg_Not_Running scanlogd
+		exit 1
+	fi	
+        ;;
+  restart)
+        $0 stop
+	$0 start
+        ;;
+  status)
+	status scanlogd
+	exit $?
+        ;;
+  *)
+	msg_Usage "$0 {start|stop|status|restart}"
+        exit 1
+esac
+
+exit $RETVAL
+
+# This must be last line !
+# vi:syntax=sh:tw=78:ts=8:sw=4
