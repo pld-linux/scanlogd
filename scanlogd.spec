@@ -10,8 +10,12 @@ Source0:	http://www.openwall.com/scanlogd/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.openwall.com/scanlogd/
+PreReq:		rc-scripts
+Requires(pre):	/bin/id
+Requires(pre):	/usr/sbin/useradd
+Requires(post,preun):	/sbin/chkconfig
+Requires(postun):	/usr/sbin/userdel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Prereq:		/sbin/chkconfig
 
 %description
 scanlogd is a TCP port scan detection tool. It will hopefully let you
@@ -26,15 +30,15 @@ jednak ¶wiadom, ¿e ten program mo¿e zostaæ ³atwo oszukany przez osobê
 z odpowiedni± wiedz±.
 
 %prep
-%setup  -q
+%setup -q
 %patch0 -p1
 
 %build
-%{__make} linux OPT_FLAGS="$RPM_OPT_FLAGS"
+%{__make} linux \
+	OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,/etc/rc.d/init.d}
 
 install scanlogd $RPM_BUILD_ROOT%{_sbindir}
