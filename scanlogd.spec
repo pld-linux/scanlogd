@@ -43,7 +43,7 @@ install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,/etc/rc.d/init.d}
 
 install scanlogd $RPM_BUILD_ROOT%{_sbindir}
 install scanlogd.8 $RPM_BUILD_ROOT%{_mandir}/man8
-install %SOURCE1 $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
