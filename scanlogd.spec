@@ -5,8 +5,6 @@ Version:	2.2
 Release:	2
 License:	BSD
 Group:		Networking/Admin
-Group(de):	Netzwerkwesen/Administration
-Group(pl):	Sieciowe/Administracyjne
 Source0:	http://www.openwall.com/scanlogd/%{name}-%{version}.tar.gz
 Source1:	scanlogd.init
 Patch0:		%{name}-Makefile.patch
