@@ -7,6 +7,7 @@ License:	BSD
 Group:		Networking/Admin
 Source0:	http://www.openwall.com/scanlogd/%{name}-%{version}.tar.gz
 # Source0-md5:	6b53ad390a51f0835e66b1efa84d710a
+# Source0-size:	10809
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.openwall.com/scanlogd/
