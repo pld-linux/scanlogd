@@ -13,10 +13,15 @@
 . /etc/sysconfig/network
 
 # Check that networking is up.
-if is_no "${NETWORKING}"; then
-	msg_Network_Down scanlogd
-	exit 1
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down scanlogd
+		exit 1
+	fi
+else
+	exit 0
 fi
+
 
 # See how we were called.
 case "$1" in
@@ -28,32 +33,36 @@ case "$1" in
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/scanlogd
 	else
-		msg_Already_Running scanlogd
+		msg_already_running scanlogd
 		exit 1
 	fi
-        ;;
+	;;
   stop)
-        # Stop daemons.
+	# Stop daemons.
 	if [ -f /var/lock/subsys/scanlogd ]; then
 		msg_stopping scanlogd
 		killproc scanlogd
 		rm -f /var/lock/subsys/scanlogd >/dev/null 2>&1
 	else
-		msg_Not_Running scanlogd
+		msg_not_running scanlogd
 		exit 1
 	fi	
-        ;;
-  restart)
-        $0 stop
+	;;
+  restart|reload)
+	$0 stop
 	$0 start
-        ;;
+	;;
+  force-reload)
+	$0 stop && $0 start
+	exit $?
+	;;
   status)
 	status scanlogd
 	exit $?
-        ;;
+	;;
   *)
-	msg_Usage "$0 {start|stop|status|restart}"
-        exit 1
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 1
 esac
 
 exit $RETVAL
