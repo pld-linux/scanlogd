@@ -2,7 +2,7 @@ Summary:	Port scanning detection daemon
 Summary(pl):	Deamon wykrywaj±cy skanowanie portów
 Name:		scanlogd
 Version:	2.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
@@ -12,6 +12,7 @@ Source1:	scanlogd.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.openwall.com/scanlogd/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Prereq:		/sbin/chkconfig
 
 %description
 scanlogd is a TCP port scan detection tool. It will hopefully let you know
@@ -28,7 +29,6 @@ zamierza przetestowaæ bezpieczeñstwo twojego systemu ;). B±d¼ jednak ¶wiadom,
 %patch0 -p1
 
 %build
-
 %{__make} linux OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
@@ -39,6 +39,9 @@ install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,/etc/rc.d/init.d}
 install scanlogd $RPM_BUILD_ROOT%{_sbindir}
 install scanlogd.8 $RPM_BUILD_ROOT%{_mandir}/man8
 install %SOURCE1 $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %pre
 if [ -z "`id -u scanlogd 2>/dev/null`" ]; then
@@ -65,9 +68,6 @@ fi
 if [ "$1" = "0" ]; then
 	/usr/sbin/userdel scanlogd
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
