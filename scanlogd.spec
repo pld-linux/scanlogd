@@ -41,30 +41,16 @@ install scanlogd.8 $RPM_BUILD_ROOT%{_mandir}/man8
 install %SOURCE1 $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 
 %pre
-if [ -z "`id -u scanlogd 2>/dev/null`" ]; then
-	/usr/sbin/useradd -u 78 -d /dev/null -s /bin/false -c "scanlogd user" -g nobody scanlogd 1>&2
-fi
+UID=78; GROUP=nobody; HOMEDIR=/dev/null; COMMENT="scanlogd user"; %useradd
 
 %post
-/sbin/chkconfig --add scanlogd
-if [ -f /var/lock/subsys/scanlogd ]; then
-	/etc/rc.d/init.d/scanlogd restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/scanlogd start\" to start scanlog daemon."
-fi
+DESC="scanlog daemon"; %chkconfig_add
 
 %preun
-if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/scanlogd ]; then
-		/etc/rc.d/init.d/scanlogd stop 1>&2
-	fi
-	/sbin/chkconfig --del scanlogd
-fi
+%chkconfig_del
 
 %postun
-if [ "$1" = "0" ]; then
-	/usr/sbin/userdel scanlogd
-fi
+%userdel
 
 %clean
 rm -rf $RPM_BUILD_ROOT
