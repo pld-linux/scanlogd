@@ -78,4 +78,4 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/scanlogd
 %{_mandir}/man8/*
-%attr(750,root,root) /etc/rc.d/init.d/scanlogd
+%attr(754,root,root) /etc/rc.d/init.d/scanlogd
