@@ -1,0 +1,12 @@
+diff -urN scanlogd-2.2.orig/Makefile scanlogd-2.2/Makefile
+--- scanlogd-2.2.orig/Makefile	Fri Nov 10 03:47:04 2000
++++ scanlogd-2.2/Makefile	Tue May  8 13:29:39 2001
+@@ -1,7 +1,7 @@
+ CC = gcc
+ LD = gcc
+ RM = rm -f
+-CFLAGS = -c -Wall -O2 -fomit-frame-pointer
++CFLAGS = -c -Wall $(OPT_FLAGS) -fomit-frame-pointer
+ LDFLAGS = -s
+ 
+ PCAP_H = -I/usr/include/pcap
