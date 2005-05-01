@@ -11,7 +11,7 @@ Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.openwall.com/scanlogd/
 PreReq:		rc-scripts
-BuildRequires:	rpmbuild(macros) >= 1.159
+BuildRequires:	rpmbuild(macros) >= 1.202
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/useradd
 Requires(post,preun):	/sbin/chkconfig
@@ -51,14 +51,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 rm -rf $RPM_BUILD_ROOT
 
 %pre
-if [ -n "`/bin/id -u scanlogd 2>/dev/null`" ]; then
-	if [ "`/bin/id -u scanlogd`" != "78" ]; then
-		echo "Error: user scanlogd doesn't have uid=78. Correct this before installing scanlogd." 1>&2
-		exit 1
-	fi
-else
-	/usr/sbin/useradd -u 78 -d /usr/share/empty -s /bin/false -c "scanlogd user" -g nobody scanlogd 1>&2
-fi
+%useradd -u 78 -d /usr/share/empty -s /bin/false -c "scanlogd user" -g nobody scanlogd
 
 %post
 /sbin/chkconfig --add scanlogd
