@@ -10,8 +10,8 @@ Source0:	http://www.openwall.com/scanlogd/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.openwall.com/scanlogd/
-PreReq:		rc-scripts
 BuildRequires:	rpmbuild(macros) >= 1.202
+Requires:	rc-scripts
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/useradd
 Requires(post,preun):	/sbin/chkconfig
@@ -37,6 +37,7 @@ z odpowiedni± wiedz±.
 
 %build
 %{__make} linux \
+	CC="%{__cc}" \
 	OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
