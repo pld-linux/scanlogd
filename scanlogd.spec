@@ -1,5 +1,5 @@
 Summary:	Port scanning detection daemon
-Summary(pl):	Deamon wykrywaj±cy skanowanie portów
+Summary(pl.UTF-8):   Deamon wykrywajÄ…cy skanowanie portÃ³w
 Name:		scanlogd
 Version:	2.2.5
 Release:	1
@@ -25,11 +25,11 @@ know if some guys are going to make an audit of your system security
 ;) But be aware that this tool can be easly fooled by person with some
 knowledge.
 
-%description -l pl
-scanlogd s³u¿y do wykrywania skanowania portów TCP. Mo¿e daæ ci znaæ,
-¿e kto¶ zamierza przetestowaæ bezpieczeñstwo twojego systemu ;). B±d¼
-jednak ¶wiadom, ¿e ten program mo¿e zostaæ ³atwo oszukany przez osobê
-z odpowiedni± wiedz±.
+%description -l pl.UTF-8
+scanlogd sÅ‚uÅ¼y do wykrywania skanowania portÃ³w TCP. MoÅ¼e daÄ‡ ci znaÄ‡,
+Å¼e ktoÅ› zamierza przetestowaÄ‡ bezpieczeÅ„stwo twojego systemu ;). BÄ…dÅº
+jednak Å›wiadom, Å¼e ten program moÅ¼e zostaÄ‡ Å‚atwo oszukany przez osobÄ™
+z odpowiedniÄ… wiedzÄ….
 
 %prep
 %setup -q
