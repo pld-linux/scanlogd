@@ -1,5 +1,5 @@
 Summary:	Port scanning detection daemon
-Summary(pl.UTF-8):   Deamon wykrywający skanowanie portów
+Summary(pl.UTF-8):	Deamon wykrywający skanowanie portów
 Name:		scanlogd
 Version:	2.2.5
 Release:	1
