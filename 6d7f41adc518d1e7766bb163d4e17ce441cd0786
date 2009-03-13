@@ -1,0 +1,2 @@
+- Removed compression of info and manuals. It's done automatically by rpm
+  now.
