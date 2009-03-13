@@ -1,11 +1,11 @@
-diff -urN scanlogd-2.2.orig/Makefile scanlogd-2.2/Makefile
---- scanlogd-2.2.orig/Makefile	Fri Nov 10 03:47:04 2000
-+++ scanlogd-2.2/Makefile	Tue May  8 13:29:39 2001
+diff -burNp scanlogd-2.2.6/Makefile scanlogd-2.2.6-dud/Makefile
+--- scanlogd-2.2.6/Makefile	2006-03-05 11:03:15.000000000 +0100
++++ scanlogd-2.2.6-dud/Makefile	2009-03-13 15:15:43.206131305 +0100
 @@ -1,7 +1,7 @@
  CC = gcc
- LD = gcc
+ LD = $(CC)
  RM = rm -f
--CFLAGS = -c -Wall -O2 -fomit-frame-pointer
+-CFLAGS = -Wall -O2 -fomit-frame-pointer
 +CFLAGS = -c -Wall $(OPT_FLAGS) -fomit-frame-pointer
  LDFLAGS = -s
  
