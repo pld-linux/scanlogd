@@ -1,12 +1,12 @@
 Summary:	Port scanning detection daemon
 Summary(pl.UTF-8):	Deamon wykrywający skanowanie portów
 Name:		scanlogd
-Version:	2.2.5
+Version:	2.2.6
 Release:	1
 License:	BSD
 Group:		Networking/Admin
 Source0:	http://www.openwall.com/scanlogd/%{name}-%{version}.tar.gz
-# Source0-md5:	6b53ad390a51f0835e66b1efa84d710a
+# Source0-md5:	7b8187ea718ebe47f22805b921b909ab
 Source1:	%{name}.init
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.openwall.com/scanlogd/
